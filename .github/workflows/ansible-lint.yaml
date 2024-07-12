@@ -1,0 +1,24 @@
+name: Ansible Lint
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install ansible-lint
+        run: pip install ansible-lint
+
+      - name: Install Galaxy Modules
+        run: ansible-galaxy install -r requirements/common.yaml
+
+      - name: Lint
+        run: ansible-lint main.yaml
