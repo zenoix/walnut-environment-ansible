@@ -1,0 +1,38 @@
+default_roles:
+  - system
+  - dotfiles
+  - alacritty
+  - bat
+  - delta
+  # - discord
+  - docker
+  - fd
+  # - firefox
+  - fonts
+  - fzf
+  - git
+  - go
+  # - hyprland
+  - julia
+  - lua
+  - miniconda
+  - neofetch
+  - neovim
+  - npm
+  - nvm
+  - python
+  - r
+  # - rofi
+  - starship
+  - stow
+  - tmux
+  - tmuxp
+  # - waybar
+  - zathura
+  - zsh
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+  - zoxide
+
+git_user_name: "zenoix"
+git_user_email: "41812358+zenoix@users.noreply.github.com"
