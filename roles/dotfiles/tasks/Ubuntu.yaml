@@ -1,0 +1,6 @@
+---
+- name: "Dotfiles | Install GNU Stow | {{ ansible_distribution }}"
+  ansible.builtin.apt:
+    name:
+      - stow
+  become: true

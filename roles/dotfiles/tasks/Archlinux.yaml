@@ -1,0 +1,6 @@
+---
+- name: "Dotfiles | Install GNU Stow | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - stow
+  become: true

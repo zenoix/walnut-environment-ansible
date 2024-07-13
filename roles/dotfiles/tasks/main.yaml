@@ -1,0 +1,28 @@
+---
+- name: "Dotfiles | Checking for Distribution Config: {{ ansible_distribution }}"
+  ansible.builtin.stat:
+    path: "{{ role_path }}/tasks/{{ ansible_distribution }}.yaml"
+  register: dotfiles_distribution_config
+
+- name: "Dotfiles | Create Dotfiles Directory | {{ ansible_distribution }}"
+  ansible.builtin.file:
+    path: "/home/{{ host_user }}/dotfiles"
+    state: directory
+    mode: "0755"
+
+- name: "Dotfiles | Clone Dotfiles | {{ ansible_distribution }}"
+  ansible.builtin.git:
+    repo: "https://github.com/zenoix/dotfiles.git"
+    dest: "/home/{{ host_user }}/dotfiles"
+    version: main
+
+- name: "Dotfiles | Run GNU Stow Install Task | {{ ansible_distribution }}"
+  ansible.builtin.include_tasks: "{{ ansible_distribution }}.yaml"
+  when: dotfiles_distribution_config.stat.exists
+
+- name: "Dotfiles | Set Up Symlinks | {{ ansible_distribution }}"
+  ansible.builtin.command:
+    chdir: "/home/{{ host_user }}/dotfiles"
+    cmd: stow .
+  register: stow_output
+  changed_when: true
