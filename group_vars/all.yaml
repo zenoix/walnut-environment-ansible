@@ -20,7 +20,7 @@ default_roles:
   - neovim
   # - npm
   # - nvm
-  # - python
+  - python
   # - r
   # # - rofi
   # - starship
