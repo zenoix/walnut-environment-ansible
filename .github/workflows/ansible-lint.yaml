@@ -20,11 +20,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ansible-lint
-        run: pip install ansible-lint
-
-      - name: Install Galaxy Modules
-        run: ansible-galaxy install -r requirements/common.yaml
-
-      - name: Lint
-        run: ansible-lint main.yaml
+      - name: Run Ansible Lint
+        uses: ansible/ansible-lint@v24.7.0
+            
