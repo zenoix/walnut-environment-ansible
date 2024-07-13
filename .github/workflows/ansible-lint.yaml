@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Galaxy Modules
-        run: ansible-galaxy install -r requirements.yaml
+        run: ansible-galaxy install -r requirements.yml
 
       - name: Run Ansible Lint
         uses: ansible/ansible-lint@v24.7.0
