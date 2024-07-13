@@ -104,6 +104,7 @@
         owner: "{{ host_user }}"
         group: "{{ host_user }}"
         force: true
+        mode: preserve
       become: true
       notify:
         - Remove extracted go directory
