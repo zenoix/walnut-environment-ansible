@@ -11,5 +11,6 @@
   ansible.builtin.apt:
     name:
       - git
-      - python-apt
+      - python3-apt
+      - software-properties-common
   become: true
