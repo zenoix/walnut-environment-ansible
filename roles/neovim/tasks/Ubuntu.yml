@@ -1,0 +1,25 @@
+---
+- name: "Neovim | Dependencies | {{ ansible_distribution }}"
+  ansible.builtin.apt:
+    name:
+      - cmake
+      - curl
+      - pkg-config
+      - libtool
+      - unzip
+      - ripgrep
+    state: present
+  become: true
+
+- name: "Neovim | Add Neovim Apt Repository | {{ ansible_distribution }}"
+  ansible.builtin.apt_repository:
+    repo: ppa:neovim-ppa/unstable
+    state: present
+  become: true
+
+- name: "Neovim | Install Neovim | {{ ansible_distribution }}"
+  ansible.builtin.apt:
+    name:
+      - neovim
+    update_cache: true
+  become: true

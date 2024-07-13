@@ -1,0 +1,14 @@
+---
+- name: "Neovim | Dependencies | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - ripgrep
+    state: present
+  become: true
+
+- name: "Neovim | Install Neovim | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - neovim
+    state: latest
+  become: true

@@ -17,7 +17,7 @@ default_roles:
   # - lua
   # - miniconda
   # - neofetch
-  # - neovim
+  - neovim
   # - npm
   # - nvm
   # - python
