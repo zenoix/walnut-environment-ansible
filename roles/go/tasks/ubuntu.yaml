@@ -1,0 +1,109 @@
+---
+- name: Golang | Install dependencies | "{{ ansible_distribution }}"
+  ansible.builtin.apt:
+    pkg:
+      - "curl"
+      - "gcc"
+      - "git"
+      - "findutils"
+      - "make"
+      - "rsync"
+      - "tar"
+      - "jq"
+    state: present
+  register: apt_result
+  become: true
+  until: apt_result is success
+  retries: 1
+  delay: 2
+
+- name: Golang | Define GOARCH | "{{ ansible_distribution }}"
+  ansible.builtin.set_fact:
+    goarch: "{{ ansible_machine | replace('x86_64', 'amd64') | replace('aarch64', 'arm64') }}"
+
+- name: Golang | Define GOOS | "{{ ansible_distribution }}"
+  ansible.builtin.set_fact:
+    goos: "{{ ansible_system | lower }}"
+
+- name: Golang | GOARCH Value | "{{ ansible_distribution }}"
+  ansible.builtin.debug:
+    var: goarch
+
+- name: Golang | GOOS Value | "{{ ansible_distribution }}"
+  ansible.builtin.debug:
+    var: goos
+
+- name: Golang | Getting version information | "{{ ansible_distribution }}"
+  ansible.builtin.command: "/usr/bin/go version"
+  register: current_go_version
+  changed_when: false
+  failed_when: false
+
+- name: Golang | Querying Latest Version JSON | "{{ ansible_distribution }}"
+  ansible.builtin.uri:
+    url: https://go.dev/dl/?mode=json
+  register: go_latest_version_json
+  changed_when: false
+
+- name: Golang | Registering go Latest Version | "{{ ansible_distribution }}"
+  ansible.builtin.set_fact:
+    go_latest_version: "go version {{ go_latest_version_json.json[0].version }} {{ goos }}/{{ goarch }}"
+
+- name: Golang | Registering go Latest Release | "{{ ansible_distribution }}"
+  ansible.builtin.set_fact:
+    go_latest_release: "{{ go_latest_version_json.json[0].version }}"
+
+- name: Golang | Show current_go_version debug | "{{ ansible_distribution }}"
+  ansible.builtin.debug:
+    var: current_go_version.stdout|default('')
+
+- name: Golang | Show go_latest_release debug | "{{ ansible_distribution }}"
+  ansible.builtin.debug:
+    var: go_latest_release
+
+- name: Golang | Install "{{ ansible_distribution }}"
+  when: go_latest_version not in current_go_version.stdout|default('')
+  block:
+    - name: Golang | Ensure clean download destination | "{{ ansible_distribution }}"
+      ansible.builtin.file:
+        path: "/tmp/{{ go_file }}.tar.gz"
+        state: absent
+      become: true
+
+    - name: Golang | Downloading GoLang Release | "{{ ansible_distribution }}"
+      ansible.builtin.get_url:
+        url: "https://golang.org/dl/{{ go_file }}.tar.gz"
+        dest: /tmp/
+        mode: "0644"
+        force: true
+      notify:
+        - Cleanup go downloaded tar
+
+    - name: Golang | Ensure clean extraction destination | "{{ ansible_distribution }}"
+      ansible.builtin.file:
+        path: "/tmp/go"
+        state: absent
+      become: true
+
+    - name: Golang | Extract go tar file | "{{ ansible_distribution }}"
+      ansible.builtin.unarchive:
+        src: "/tmp/{{ go_file }}.tar.gz"
+        dest: /tmp
+
+    - name: Golang | Remove any current Go installations | "{{ ansible_distribution }}"
+      ansible.builtin.file:
+        path: /usr/local/go
+        state: absent
+      become: true
+
+    - name: Golang | Install Go | "{{ ansible_distribution }}"
+      ansible.builtin.copy:
+        remote_src: true
+        src: /tmp/go
+        dest: /usr/local/
+        owner: "{{ host_user }}"
+        group: "{{ host_user }}"
+        force: true
+      become: true
+      notify:
+        - Remove extracted go directory
