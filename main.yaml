@@ -1,5 +1,5 @@
 ---
-- name: Walnut Config
+- name: Walnut Environment
   hosts: localhost
   connection: local
 
