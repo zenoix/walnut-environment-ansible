@@ -20,4 +20,3 @@ jobs:
 
       - name: Run Ansible Lint
         uses: ansible/ansible-lint@v24.7.0
-            
