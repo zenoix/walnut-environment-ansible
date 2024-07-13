@@ -1,0 +1,14 @@
+---
+- name: "System | Update Package Manager | {{ ansible_distribution }}"
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: full
+    autoremove: true
+    autoclean: true
+  become: true
+
+- name: "System | Install Packages | {{ ansible_distribution }}"
+  ansible.builtin.apt:
+    name:
+      - git
+  become: true
