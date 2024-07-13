@@ -11,4 +11,5 @@
   ansible.builtin.apt:
     name:
       - git
+      - python-apt
   become: true
