@@ -1,0 +1,7 @@
+---
+- name: "Zsh | Install Zsh | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - zsh
+    state: latest
+  become: true

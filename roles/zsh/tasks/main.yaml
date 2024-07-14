@@ -1,0 +1,24 @@
+---
+- name: "Zsh | Checking for Distribution Config | {{ ansible_distribution }}"
+  ansible.builtin.stat:
+    path: "{{ role_path }}/tasks/{{ ansible_distribution }}.yaml"
+  register: zsh_distribution_config
+
+- name: "Zsh | Run Tasks | {{ ansible_distribution }}"
+  ansible.builtin.include_tasks: "{{ ansible_distribution }}.yaml"
+  when: zsh_distribution_config.stat.exists
+
+- name: "Zsh | Change Default Shell"
+  block:
+    - name: "Find Zsh Binary"
+      ansible.builtin.command:
+        cmd: which zsh
+      register: zsh_bin_path
+      changed_when: zsh_bin_path.rc != 0
+
+    - name: "Change Default Shell"
+      ansible.builtin.user:
+        name: "{{ ansible_user_id }}"
+        shell: "{{ zsh_bin_path }}"
+      become: true
+# TODO: Zsh syntax highlighting, zsh autosuggestions, fzf, fzf-git, zoxide

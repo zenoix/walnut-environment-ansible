@@ -9,7 +9,6 @@ default_roles:
   # - fd
   # # - firefox
   # - fonts
-  # - fzf
   # - git
   - go
   # - hyprland
@@ -23,15 +22,11 @@ default_roles:
   - python
   # - r
   # # - rofi
-  # - starship
   - tmux
   # - tmuxp
   # # - waybar
   - zathura
-  # - zsh
-  # - zsh-autosuggestions
-  # - zsh-syntax-highlighting
-  # - zoxide
+  - zsh
 
 git_user_name: "zenoix"
 git_user_email: "41812358+zenoix@users.noreply.github.com"
