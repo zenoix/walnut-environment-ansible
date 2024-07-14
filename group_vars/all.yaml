@@ -16,7 +16,7 @@ default_roles:
   # - julia
   # - lua
   # - miniconda
-  # - neofetch
+  - neofetch
   - neovim
   # - npm
   # - nvm

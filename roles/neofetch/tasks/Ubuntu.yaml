@@ -1,0 +1,6 @@
+---
+- name: "Neofetch | Install Neofetch | {{ ansible_distribution }}"
+  ansible.builtin.apt:
+    name: neofetch
+    state: present
+  become: true

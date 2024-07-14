@@ -1,0 +1,6 @@
+---
+- name: "Neofetch | Install Neofetch | {{ ansible_distribution }}"
+  community.general.pacman:
+    name: neofetch
+    state: present
+  become: true
