@@ -21,4 +21,12 @@
         name: "{{ ansible_user_id }}"
         shell: "{{ zsh_bin_path }}"
       become: true
-# TODO: Zsh syntax highlighting, zsh autosuggestions, fzf, fzf-git, zoxide
+
+- name: "Zsh | Plugins | Checking for Distribution Config | {{ ansible_distribution }}"
+  ansible.builtin.stat:
+    path: "{{ role_path }}/tasks/{{ ansible_distribution }}_plugins.yaml"
+  register: zsh_plugins_distribution_config
+
+- name: "Zsh | Plugins | Run Tasks | {{ ansible_distribution }}"
+  ansible.builtin.include_tasks: "{{ ansible_distribution }}_plugins.yaml"
+  when: zsh_plugins_distribution_config.stat.exists

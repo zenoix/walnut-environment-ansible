@@ -1,0 +1,35 @@
+---
+- name: "Zsh | Plugins | Install fzf | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - fzf
+    state: present
+  become: true
+
+- name: "Zsh | Plugins | Install fzf-git | {{ ansible_distribution }}"
+  ansible.builtin.git:
+    repo: "https://github.com/junegunn/fzf-git.sh.git"
+    dest: /usr/share/zsh/plugins/fzf-git.sh/
+    version: main
+  become: true
+
+- name: "Zsh | Plugins | Install zsh-syntax-highlighting | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - zsh-syntax-highlighting
+    state: present
+  become: true
+
+- name: "Zsh | Plugins | Install zsh-autosuggestions | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - zsh-autosuggestions
+    state: present
+  become: true
+
+- name: "Zsh | Plugins | Install zoxide | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - zoxide
+    state: present
+  become: true
