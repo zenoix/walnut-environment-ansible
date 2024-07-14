@@ -24,7 +24,7 @@ default_roles:
   # - r
   # # - rofi
   # - starship
-  # - tmux
+  - tmux
   # - tmuxp
   # # - waybar
   # - zathura
