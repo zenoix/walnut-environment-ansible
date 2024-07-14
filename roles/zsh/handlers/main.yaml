@@ -1,0 +1,6 @@
+---
+- name: Clean Up Downloaded Zoxide Install Script
+  ansible.builtin.file:
+    path: "/tmp/zoxide.sh"
+    state: absent
+  become: true
