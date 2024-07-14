@@ -1,0 +1,6 @@
+---
+- name: "Zathura | Install Zathura | {{ ansible_distribution }}"
+  ansible.builtin.apt:
+    name: zathura
+    state: present
+  become: true

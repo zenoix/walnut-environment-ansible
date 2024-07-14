@@ -1,0 +1,6 @@
+---
+- name: "Zathura | Install Zathura | {{ ansible_distribution }}"
+  community.general.pacman:
+    name: zathura
+    state: present
+  become: true
