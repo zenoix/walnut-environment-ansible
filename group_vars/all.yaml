@@ -8,7 +8,7 @@ default_roles:
   # - docker
   - fd
   # # - firefox
-  # - fonts
+  - fonts
   # - git
   - go
   # - hyprland

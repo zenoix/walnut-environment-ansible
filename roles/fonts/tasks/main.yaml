@@ -1,0 +1,19 @@
+---
+- name: "Fonts | Get Latest Nerd Font Release"
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest
+    return_content: true
+  register: nerd_font_json
+
+- name: "Fonts | Download Jetbrains Mono Nerd Font"
+  block:
+    - name: Fonts | Create Fonts Directory If Not Exist
+      ansible.builtin.file:
+        path: ~/.local/share/fonts
+        state: directory
+        mode: "0755"
+    - name: Fonts | Download Jetbrains Mono Nerd Font
+      ansible.builtin.unarchive:
+        src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_font_json.json.tag_name }}/JetBrainsMono.zip"
+        dest: ~/.local/share/fonts
+        remote_src: true
