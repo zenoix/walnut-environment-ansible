@@ -4,3 +4,17 @@
     name: fd-find
     state: present
   become: true
+
+- name: "Fd | Replace Fdfind with Fd | {{ ansible_distribution }}"
+  block:
+    - name: "Which fd"
+      ansible.builtin.command:
+        cmd: which fdfind
+      register: fd_bin_path
+      changed_when: fd_bin_path.rc != 0
+
+    - name: "Create fd Symlink"
+      ansible.builtin.file:
+        src: "{{ fd_bin_path.stdout }}"
+        dest: ~/.local/bin/fd
+        state: link
