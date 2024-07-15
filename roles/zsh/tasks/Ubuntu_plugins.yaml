@@ -47,7 +47,7 @@
         - Clean Up Downloaded Zoxide Install Script
     - name: "Zsh | Plugins | Install zoxide"
       ansible.builtin.shell:
-        cmd: set -o pipefail && cat /tmp/zoxide.sh | sh -s -- -y
+        cmd: set -o pipefail && cat /tmp/zoxide.sh | sh -s
       register: zoxide_install
       changed_when: zoxide_install.rc != 0
 
@@ -63,5 +63,6 @@
     - name: "Zsh | Plugins | Install Starship"
       ansible.builtin.shell:
         cmd: set -o pipefail && cat /tmp/starship.sh | sh -s -- -y
+        executable: /bin/bash
       register: starship_install
       changed_when: starship_install.rc != 0
