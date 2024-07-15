@@ -50,3 +50,18 @@
         cmd: set -o pipefail && cat /tmp/zoxide.sh | sh -s -- -y
       register: zoxide_install
       changed_when: zoxide_install.rc != 0
+
+- name: "Zsh | Plugins | Install Starship | {{ ansible_distribution }}"
+  block:
+    - name: "Zsh | Plugins | Download Starship"
+      ansible.builtin.get_url:
+        url: https://starship.rs/install.sh
+        dest: /tmp/starship.sh
+        mode: "0755"
+      notify:
+        - Clean Up Downloaded Starship Install Script
+    - name: "Zsh | Plugins | Install Starship"
+      ansible.builtin.shell:
+        cmd: set -o pipefail && cat /tmp/starship.sh | sh -s -- -y
+      register: starship_install
+      changed_when: starship_install.rc != 0

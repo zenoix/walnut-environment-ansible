@@ -4,3 +4,9 @@
     path: "/tmp/zoxide.sh"
     state: absent
   become: true
+
+- name: Clean Up Downloaded Starship Install Script
+  ansible.builtin.file:
+    path: "/tmp/starship.sh"
+    state: absent
+  become: true
