@@ -19,7 +19,7 @@
     - name: "Change Default Shell"
       ansible.builtin.user:
         name: "{{ ansible_user_id }}"
-        shell: "{{ zsh_bin_path }}"
+        shell: "{{ zsh_bin_path.stdout }}"
       become: true
 
 - name: "Zsh | Plugins | Checking for Distribution Config | {{ ansible_distribution }}"
