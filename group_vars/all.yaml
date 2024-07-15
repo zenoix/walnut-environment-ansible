@@ -6,7 +6,7 @@ default_roles:
   - delta
   # # - discord
   # - docker
-  # - fd
+  - fd
   # # - firefox
   # - fonts
   # - git

@@ -1,0 +1,9 @@
+---
+- name: "Fd | Checking for Distribution Config | {{ ansible_distribution }}"
+  ansible.builtin.stat:
+    path: "{{ role_path }}/tasks/{{ ansible_distribution }}.yaml"
+  register: fd_distribution_config
+
+- name: "Fd | Run Tasks | {{ ansible_distribution }}"
+  ansible.builtin.include_tasks: "{{ ansible_distribution }}.yaml"
+  when: fd_distribution_config.stat.exists
