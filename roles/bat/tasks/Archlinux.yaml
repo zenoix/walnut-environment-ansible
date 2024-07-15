@@ -1,0 +1,7 @@
+---
+- Name: "Bat | Install Bat | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - bat
+    state: present
+  become: true

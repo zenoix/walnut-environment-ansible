@@ -1,0 +1,7 @@
+---
+- Name: "Bat | Install Bat | {{ ansible_distribution }}"
+  ansible.builtin.apt:
+    name:
+      - bat
+    state: present
+  become: true
