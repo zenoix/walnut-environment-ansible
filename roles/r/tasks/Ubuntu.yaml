@@ -1,0 +1,36 @@
+---
+- name: "R | Install Dependencies | {{ ansible_distribution }}"
+  ansible.builtin.apt:
+    name:
+      - software-properties-common
+      - dirmngr
+    install_recommends: false
+  become: true
+
+- name: "R | Add Signing Keys | {{ ansible_distribution }}"
+  block:
+    - name: "R | Download Signing Key"
+      ansible.builtin.get_url:
+        url: https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc
+        dest: /tmp/marutter_pubkey.asc
+        mode: "0755"
+      notify: Delete R Signing Key
+
+    - name: "R | Add signing Key"
+      ansible.builtin.command:
+        cmd: cat /tmp/marutter_pubkey.asc >> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+      register: r_signing_key
+      changed_when: r_signing_key.rc != 0
+      become: true
+
+- name: "R | Add Cran Apt Repository | {{ ansible_distribution }}"
+  ansible.builtin.apt_repository:
+    repo: "deb https://cloud.r-project.org/bin/linux/ubuntu {{ ansible_distribution_release }}-cran40/"
+  become: true
+
+- name: "R | Install R | {{ ansible_distribution }}"
+  ansible.builtin.apt:
+    name:
+      - "r-base"
+    install_recommends: false
+  become: true

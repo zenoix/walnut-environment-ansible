@@ -1,0 +1,6 @@
+---
+- name: Delete R Signing Key
+  ansible.builtin.file:
+    path: "/tmp/marutter_pubkey.asc"
+    state: absent
+  become: true

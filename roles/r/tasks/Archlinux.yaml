@@ -1,0 +1,6 @@
+---
+- name: "R | Install R | {{ ansible_distribution }}"
+  community.general.pacman:
+    name: r
+    state: present
+  become: true
