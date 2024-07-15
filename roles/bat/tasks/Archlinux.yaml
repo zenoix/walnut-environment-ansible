@@ -1,5 +1,5 @@
 ---
-- Name: "Bat | Install Bat | {{ ansible_distribution }}"
+- name: "Bat | Install Bat | {{ ansible_distribution }}"
   community.general.pacman:
     name:
       - bat

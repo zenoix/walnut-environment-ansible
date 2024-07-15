@@ -8,8 +8,16 @@
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yaml"
   when: bat_distribution_config.stat.exists
 
-- name: "Bat | Update Bat Cache | {{ ansible_distribution }}"
+- name: "Bat | Update Bat Cache | Archlinux"
   ansible.builtin.command:
     cmd: bat cache --build
   register: bat_cache
   changed_when: bat_cache.rc != 0
+  when: ansible_distribution == "Archlinux"
+
+- name: "Bat | Update Bat Cache | Ubuntu"
+  ansible.builtin.command:
+    cmd: batcat cache --build
+  register: bat_cache
+  changed_when: bat_cache.rc != 0
+  when: ansible_distribution == "Ubuntu"
