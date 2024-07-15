@@ -1,0 +1,7 @@
+---
+- name: "Delta | Install Delta | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - git-delta
+    state: present
+  become: true

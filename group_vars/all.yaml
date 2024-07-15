@@ -3,7 +3,7 @@ default_roles:
   - dotfiles
   # - alacritty
   - bat
-  # - delta
+  - delta
   # # - discord
   # - docker
   # - fd
