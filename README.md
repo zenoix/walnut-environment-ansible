@@ -1,4 +1,4 @@
-# Walnut Environment
+# Walnut Environment (WIP)
 
 This repository contains my Ansible setup to automate the installation and configuration of my development environment in Ubuntu and Arch distributions. 
 
