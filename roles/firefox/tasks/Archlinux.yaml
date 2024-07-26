@@ -1,0 +1,7 @@
+---
+- name: "Firefox | Install Firefox | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - firefox
+    state: present
+  become: true

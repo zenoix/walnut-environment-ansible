@@ -7,7 +7,7 @@ default_roles:
   # # - discord
   # - docker
   - fd
-  # # - firefox
+  - firefox
   - fonts
   # - git
   - go
