@@ -52,6 +52,12 @@ Either comment out the ones you don't want to install, or use `--tags`/`-t` to o
 ### Post-Execution
 After running the playbook, you may have to do extra things to completely set up the environment based on what roles were run.
 
+#### Neovim
+When you first open up neovim, a whole bunch of plugins will attempt to be installed. If you get `Could not resolve host: github.com`, you will need to start `systemd-resolved`:
+```bash
+systemctl start systemd-resolved
+```
+
 #### Tmux
 Tmux's tmux plugin manager will need to install the plugins. To do this, use `<prefix>I`. In my configuration, `Ctrl` + `Space` is my prefix.
 
