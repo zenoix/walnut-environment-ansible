@@ -11,10 +11,11 @@ There are a few prerequisites needed. These are:
 - git
 - ansible-core
 - python-watchdog
+- unzip
 
 These can be installed using pacman:
 ```bash
-pacman -S git ansible-core python-watchdog
+pacman -S git ansible-core python-watchdog unzip
 ```
 
 You will need to clone this repository somewhere and install the ansible requirements:
