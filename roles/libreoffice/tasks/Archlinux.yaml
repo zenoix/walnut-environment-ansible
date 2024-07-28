@@ -1,0 +1,7 @@
+---
+- name: "LibreOffice | Install LibreOffice | {{ ansible_distribution }}"
+  community.general.pacman:
+    name:
+      - libreoffice-fresh
+    state: present
+  become: true

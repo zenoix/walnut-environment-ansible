@@ -13,6 +13,7 @@ default_roles:
   - go
   # - hyprland
   # - julia
+  - libreoffice
   # - lua
   # - miniconda
   - neofetch
